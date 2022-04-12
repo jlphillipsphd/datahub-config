@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: datahub-redirect
+spec:
+  entryPoints: # We listen to requests coming from ports 80 and 443
+    - web
+  routes:
+    - match: Host(`data.prism-rol.org`)
+      kind: Rule
+      services:
+        - name: datahub-datahub-frontend # Requests will be forwarded to this service
+          port: 9002
+      middlewares:
+        - name: datahub-https-redirect

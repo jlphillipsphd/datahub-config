@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: datahub-cert
+spec:
+  dnsNames:
+    - data.prism-rol.org
+  commonName: data.prism-rol.org
+  secretName: datahub-tls
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer
